@@ -1,0 +1,8 @@
+services:
+  web:
+    build: .
+    ports:
+      - "8137:80"
+    volumes:
+      - .:/var/www
+      - /var/www/var
