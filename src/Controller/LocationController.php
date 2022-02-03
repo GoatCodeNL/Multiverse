@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\RickMortyClient\Client;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -17,11 +18,15 @@ class LocationController extends AbstractController
     }
 
     #[Route('/location', name: 'locationIndex')]
-    public function locationIndex(): Response
+    public function locationIndex(Request $request): Response
     {
+        $locationsPerPage = 9;
+        $page = $request->get("page") ?? 1;
+
         return $this->render('location/index.html.twig', [
             'controller_name' => 'TestController',
-            'locations' => $this->rickMortyClient->getLocations()
+            'locations' => $this->rickMortyClient->getLocations(($page - 1) * $locationsPerPage, $locationsPerPage),
+            'page' => $page,
         ]);
     }
 

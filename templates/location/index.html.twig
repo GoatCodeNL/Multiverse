@@ -3,16 +3,53 @@
 {% block title %}Hello TestController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <style>
+        .example-wrapper {
+            margin: 1em auto;
+            max-width: 800px;
+            width: 95%;
+            font: 18px/1.5 sans-serif;
+        }
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+        .example-wrapper code {
+            background: #F5F5F5;
+            padding: 2px 6px;
+        }
+    </style>
 
-    {% for location in locations %}
-        <a href="{{ path('locationShow', {'id': location.id}) }}">{{ location.name }}</a><br/>
-    {% endfor %}
-</div>
+    <div class="container">
+
+        <h1>Locations</h1>
+        <ul class="pagination">
+            <li class="page-item"><a class="page-link"
+                                     href="{{ path('locationIndex', {'page': page - 1}) }}">Previous</a></li>
+            <li class="page-item"><a class="page-link" href="{{ path('locationIndex', {'page': page + 1}) }}">Next</a>
+            </li>
+        </ul>
+        <div class="row">
+
+            {% for location in locations %}
+                <div class="col">
+                    <div class="card" style="width: 24rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                <a href="{{ path('locationShow', {'id': location.id}) }}">{{ location.name }}</a>
+                            </h5>
+                            <p class="card-subtitle"></p>
+{#                            <a href="#" class="btn btn-primary">Go somewhere</a>#}
+                        </div>
+
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Dimension: {{ location.dimension }}</li>
+                            <li class="list-group-item">Type: {{ location.type }}</li>
+                            <li class="list-group-item">Residents: {{ location.residents | length }}</li>
+                        </ul>
+                    </div>
+                    <br/>
+                </div>
+
+            {% endfor %}
+        </div>
+
+    </div>
 {% endblock %}

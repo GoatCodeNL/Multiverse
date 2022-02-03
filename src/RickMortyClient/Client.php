@@ -87,8 +87,6 @@ class Client
             type: $item->type,
             dimension: $item->dimension,
             residents: $item->residents,
-            url: $item->url,
-            created: $item->created
         );
     }
 }

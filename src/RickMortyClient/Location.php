@@ -10,8 +10,6 @@ class Location
         private string $type, // The type of the location.
         private string $dimension, // The dimension in which the location is located.
         private array  $residents, // List of character who have been last seen in the location.
-        private string $url, // Link to the location's own endpoint.
-        private string $created // Time at which the location was created in the database.
     )
     {
     }
