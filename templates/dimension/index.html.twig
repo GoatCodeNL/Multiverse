@@ -13,27 +13,28 @@
 
     <ul class="pagination">
         <li class="page-item">
-            <a class="page-link" href="{{ path('characterIndex', {'page': page - 1}) }}">Previous</a>
+            <a class="page-link" href="{{ path('dimensionIndex', {'page': page - 1}) }}">Previous</a>
         </li>
         <li class="page-item">
-            <a class="page-link" href="{{ path('characterIndex', {'page': page + 1}) }}">Next</a>
+            <a class="page-link" href="{{ path('dimensionIndex', {'page': page + 1}) }}">Next</a>
         </li>
     </ul>
     <div class="row">
 
-        {% for character in characters %}
+        {% for dimension in dimensions %}
             <div class="col">
-                <a href="{{ path('characterShow', {'id': character.id}) }}">
+                <a href="{{ path('dimensionShow', {'id': dimension.id}) }}">
                     <div class="card" style="width: 18rem;">
-                        <img class="card-img-top" src="{{ character.image }}" alt="{{ character.name }}" >
+                        <img class="card-img-top" src="{{ dimension.image }}" alt="{{ dimension.name }}" >
                         <div class="card-body">
                             <h5 class="card-title">
-                                {{ character.name }}
+                                {{ dimension.name }}
                             </h5>
+                            <p class="card-subtitle"></p>
                         </div>
 
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Status: {{ character.status }}</li>
+                            <li class="list-group-item">Status: {{ dimension.status }}</li>
                         </ul>
                     </div>
                 </a>

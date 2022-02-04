@@ -2,7 +2,7 @@
 
 namespace App\RickMortyClient;
 
-abstract class Collection implements \Iterator
+abstract class Collection implements CollectionInterface
 {
     private int $position = 0;
     private array $items = [];

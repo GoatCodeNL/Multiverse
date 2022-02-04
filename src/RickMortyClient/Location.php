@@ -2,7 +2,7 @@
 
 namespace App\RickMortyClient;
 
-class Location
+class Location implements ItemInterface
 {
     public function __construct(
         private int    $id, // The id of the location.

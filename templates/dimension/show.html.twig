@@ -5,19 +5,19 @@
 {% block body %}
     <div class="card">
         <div class="card-body">
-            <img src="{{ character.image }}" alt="{{ character.name }}" >
+            <img src="{{ dimension.image }}" alt="{{ dimension.name }}" >
             <h5 class="card-title">
-                {{ character.name }}
+                {{ dimension.name }}
             </h5>
         </div>
 
         <ul class="list-group list-group-flush">
-            <li class="list-group-item">Status: {{ character.status }}</li>
-            <li class="list-group-item">Species: {{ character.species }}</li>
-            {% if character.type %}
-            <li class="list-group-item">Type: {{ character.type }}</li>
+            <li class="list-group-item">Status: {{ dimension.status }}</li>
+            <li class="list-group-item">Species: {{ dimension.species }}</li>
+            {% if dimension.type %}
+            <li class="list-group-item">Type: {{ dimension.type }}</li>
             {% endif %}
-            <li class="list-group-item">Gender: {{ character.gender }}</li>
+            <li class="list-group-item">Gender: {{ dimension.gender }}</li>
             <li class="list-group-item">Origin:
                 {% if(origin.id > 0) %}
                     <a href="{{ path('locationShow', {'id': origin.id}) }}">{{ origin.name }}</a>
@@ -31,13 +31,7 @@
                 {% else %}
                     {{ location.name }}
                 {% endif %}
-            <li class="list-group-item">Episodes:
-                <ul>
-                    {% for episode in episodes %}
-                    <li><a href="{{ path('episodeShow', {'id': episode.id}) }}">{{ episode.episodeCode }} - {{ episode.name }}</a></li>
-                    {% endfor %}
-                </ul>
-            </li>
+            <li class="list-group-item">Episodes: todo</li>
         </ul>
     </div>
 {% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}HELLO{% endblock %}
+
+{% block body %}
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">
+                {{ episode.name }}
+            </h5>
+            <p class="card-subtitle"></p>
+        </div>
+
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Air date: {{ episode.airDate }}</li>
+            <li class="list-group-item">Code: {{ episode.episodeCode }}</li>
+            <li class="list-group-item">
+                {% for character in characters %}
+                    <a href="{{ path('characterShow', {'id': character.id}) }}">
+                        <img src="{{ character.image }}" alt="{{ character.name }}" class="img-thumbnail">
+                    </a>
+                {% endfor %}
+            </li>
+        </ul>
+    </div>
+{% endblock %}

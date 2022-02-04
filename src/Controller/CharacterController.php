@@ -2,7 +2,10 @@
 
 namespace App\Controller;
 
-use App\RickMortyClient\Client;
+use App\RickMortyClient\BaseClient;
+use App\RickMortyClient\CharacterClient;
+use App\RickMortyClient\EpisodeClient;
+use App\RickMortyClient\LocationClient;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -10,11 +13,15 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class CharacterController extends AbstractController
 {
-    private Client $rickMortyClient;
+    private CharacterClient $characterClient;
+    private LocationClient $locationClient;
+    private EpisodeClient $episodeClient;
 
-    public function __construct(Client $rickMortyClient)
+    public function __construct(CharacterClient $characterClient, LocationClient $locationClient, EpisodeClient $episodeClient)
     {
-        $this->rickMortyClient = $rickMortyClient;
+        $this->characterClient = $characterClient;
+        $this->locationClient = $locationClient;
+        $this->episodeClient = $episodeClient;
     }
 
     #[Route('/character', name: 'characterIndex')]
@@ -24,7 +31,7 @@ class CharacterController extends AbstractController
         $page = $request->get("page") ?? 1;
 
         return $this->render('character/index.html.twig', [
-            'characters' => $this->rickMortyClient->getCharacters(($page - 1) * $charactersPerPage, $charactersPerPage),
+            'characters' => $this->characterClient->getAll(($page - 1) * $charactersPerPage, $charactersPerPage),
             'page' => $page,
         ]);
     }
@@ -32,10 +39,12 @@ class CharacterController extends AbstractController
     #[Route('/character/{id}', name: 'characterShow')]
     public function characterShow(int $id): Response
     {
-        $character = $this->rickMortyClient->getCharacter($id);
+        $character = $this->characterClient->get($id);
         return $this->render('character/show.html.twig', [
             'character' => $character,
-//            'residents' => $this->rickMortyClient->getCharactersBulk($character->getResidents()),
+            'origin' => $this->locationClient->get($character->getOriginId()),
+            'location' => $this->locationClient->get($character->getLocationId()),
+            'episodes' => $this->episodeClient->getBulk($character->getEpisode()),
         ]);
     }
 }

@@ -2,7 +2,10 @@
 
 namespace App\Controller;
 
-use App\RickMortyClient\Client;
+use App\RickMortyClient\BaseClient;
+use App\RickMortyClient\Character;
+use App\RickMortyClient\CharacterClient;
+use App\RickMortyClient\LocationClient;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -10,11 +13,13 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class LocationController extends AbstractController
 {
-    private Client $rickMortyClient;
+    private LocationClient $locationClient;
+    private CharacterClient $characterClient;
 
-    public function __construct(Client $rickMortyClient)
+    public function __construct(LocationClient $locationClient, CharacterClient $characterClient)
     {
-        $this->rickMortyClient = $rickMortyClient;
+        $this->locationClient = $locationClient;
+        $this->characterClient = $characterClient;
     }
 
     #[Route('/location', name: 'locationIndex')]
@@ -24,7 +29,7 @@ class LocationController extends AbstractController
         $page = $request->get("page") ?? 1;
 
         return $this->render('location/index.html.twig', [
-            'locations' => $this->rickMortyClient->getLocations(($page - 1) * $locationsPerPage, $locationsPerPage),
+            'locations' => $this->locationClient->getAll(($page - 1) * $locationsPerPage, $locationsPerPage),
             'page' => $page,
         ]);
     }
@@ -32,10 +37,10 @@ class LocationController extends AbstractController
     #[Route('/location/{id}', name: 'locationShow')]
     public function locationShow(int $id): Response
     {
-        $location = $this->rickMortyClient->getLocation($id);
+        $location = $this->locationClient->get($id);
         return $this->render('location/show.html.twig', [
             'location' => $location,
-            'residents' => $this->rickMortyClient->getCharactersBulk($location->getResidents()),
+            'residents' => $this->characterClient->getBulk($location->getResidents()),
         ]);
     }
 }

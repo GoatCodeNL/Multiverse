@@ -10,15 +10,44 @@ body {
   margin-top: 50px;
 }
 
+$redbrown: #7c3e1d;
+$brown: #392c21;
+$pink: #e89ac7;
+$blue: #62a4ab;
+$yellow: #f0e14a;
+
+a {
+  color: $redbrown;
+  text-decoration: none;
+
+  &:visited {
+    color: $redbrown;
+    text-decoration: none;
+  }
+
+  &:hover {
+    color: $brown;
+    text-decoration: none;
+  }
+
+  &:active {
+    text-decoration: none;
+  }
+}
+
+nav.navbar {
+  background-color: $pink;
+}
+
 .card {
-  border: 3px solid #e89ac7;
+  border: 3px solid $pink;
 
   .list-group-item {
-    background-color: #62a4ab;
+    background-color: $blue;
   }
 
   .card-body {
-    background-color: #f0e14a;
+    background-color: $yellow;
   }
 }
 

@@ -9,31 +9,29 @@
 {% endblock %}
 
 {% block body %}
-
-
     <ul class="pagination">
         <li class="page-item">
-            <a class="page-link" href="{{ path('characterIndex', {'page': page - 1}) }}">Previous</a>
+            <a class="page-link" href="{{ path('episodeIndex', {'page': page - 1}) }}">Previous</a>
         </li>
         <li class="page-item">
-            <a class="page-link" href="{{ path('characterIndex', {'page': page + 1}) }}">Next</a>
+            <a class="page-link" href="{{ path('episodeIndex', {'page': page + 1}) }}">Next</a>
         </li>
     </ul>
     <div class="row">
 
-        {% for character in characters %}
+        {% for episode in episodes %}
             <div class="col">
-                <a href="{{ path('characterShow', {'id': character.id}) }}">
+                <a href="{{ path('episodeShow', {'id': episode.id}) }}">
                     <div class="card" style="width: 18rem;">
-                        <img class="card-img-top" src="{{ character.image }}" alt="{{ character.name }}" >
                         <div class="card-body">
                             <h5 class="card-title">
-                                {{ character.name }}
+                                {{ episode.name }}
                             </h5>
                         </div>
 
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Status: {{ character.status }}</li>
+                            <li class="list-group-item">Air date: {{ episode.airDate }}</li>
+                            <li class="list-group-item">Characters: {{ episode.characters | length }}</li>
                         </ul>
                     </div>
                 </a>
