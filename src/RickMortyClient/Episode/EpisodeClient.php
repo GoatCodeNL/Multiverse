@@ -19,7 +19,6 @@ class EpisodeClient extends BaseClient
 
     protected function map(object $item): Episode
     {
-        dump($item);
         return new Episode(
             id: $item->id,
             name: $item->name,

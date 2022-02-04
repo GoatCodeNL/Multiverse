@@ -4,5 +4,5 @@ services:
     ports:
       - "8137:80"
     volumes:
-      - .:/var/www
+      - .:/var/www    # for dev purposes
       - /var/www/var
