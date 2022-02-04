@@ -38,3 +38,5 @@ COPY templates /var/www/templates
 COPY .env.prod /var/www/.env
 COPY composer.json /var/www/
 
+RUN mkdir /var/www/var && chown www-data:www-data /var/www -R
+

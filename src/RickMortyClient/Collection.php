@@ -15,7 +15,7 @@ abstract class Collection implements CollectionInterface
         $this->itemCount = $itemCount;
     }
 
-    public function current()
+    public function current(): mixed
     {
         return $this->items[$this->position];
     }

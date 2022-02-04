@@ -29,8 +29,9 @@ Then enter the multiverse at http://0.0.0.0:8137
 - yarn
 - composer
 
-To enable debug mode and dev volume bindings simply uncomment the line from docker-compose
+To enable debug mode and dev volume bindings simply uncomment the lines from docker-compose
 ```yaml
+#    volumes:
 #      - .:/var/www    # for dev purposes
 ```
 

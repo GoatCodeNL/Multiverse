@@ -3,6 +3,5 @@ services:
     build: .
     ports:
       - "8137:80"
-    volumes:
+#    volumes:
 #      - .:/var/www    # for dev purposes
-      - /var/www/var
