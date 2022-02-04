@@ -1,7 +1,26 @@
+@import "~bootstrap/scss/bootstrap";
+
 body {
   background-image: url("../images/background.png");
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
 
-@import "~bootstrap/scss/bootstrap";
+.container {
+  margin-top: 50px;
+}
+
+.card {
+  border: 3px solid #e89ac7;
+
+  .list-group-item {
+    background-color: #62a4ab;
+  }
+
+  .card-body {
+    background-color: #f0e14a;
+  }
+}
+
+
+

@@ -2,6 +2,12 @@
 
 {% block title %}Hello TestController!{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+
+    {{ encore_entry_link_tags('cardoverview') }}:
+{% endblock %}
+
 {% block body %}
     <style>
         .example-wrapper {
@@ -17,26 +23,25 @@
         }
     </style>
 
-    <div class="container">
+    <ul class="pagination">
+        <li class="page-item">
+            <a class="page-link" href="{{ path('locationIndex', {'page': page - 1}) }}">Previous</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="{{ path('locationIndex', {'page': page + 1}) }}">Next</a>
+        </li>
+    </ul>
+    <div class="row">
 
-        <h1>Locations</h1>
-        <ul class="pagination">
-            <li class="page-item"><a class="page-link"
-                                     href="{{ path('locationIndex', {'page': page - 1}) }}">Previous</a></li>
-            <li class="page-item"><a class="page-link" href="{{ path('locationIndex', {'page': page + 1}) }}">Next</a>
-            </li>
-        </ul>
-        <div class="row">
-
-            {% for location in locations %}
-                <div class="col">
+        {% for location in locations %}
+            <div class="col">
+                <a href="{{ path('locationShow', {'id': location.id}) }}">
                     <div class="card" style="width: 24rem;">
                         <div class="card-body">
                             <h5 class="card-title">
-                                <a href="{{ path('locationShow', {'id': location.id}) }}">{{ location.name }}</a>
+                                {{ location.name }}
                             </h5>
                             <p class="card-subtitle"></p>
-{#                            <a href="#" class="btn btn-primary">Go somewhere</a>#}
                         </div>
 
                         <ul class="list-group list-group-flush">
@@ -45,11 +50,11 @@
                             <li class="list-group-item">Residents: {{ location.residents | length }}</li>
                         </ul>
                     </div>
-                    <br/>
-                </div>
+                </a>
+                <br/>
+            </div>
 
-            {% endfor %}
-        </div>
-
+        {% endfor %}
     </div>
+
 {% endblock %}

@@ -2,9 +2,9 @@
 
 namespace App\RickMortyClient;
 
-class LocationCollection extends Collection
+class CharacterCollection extends Collection
 {
-    public function current(): Location
+    public function current(): Character
     {
         return parent::current();
     }

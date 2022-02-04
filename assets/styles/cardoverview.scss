@@ -1,0 +1,24 @@
+.card {
+  border: 3px solid #e89ac7;
+
+  .list-group-item {
+    background-color: #62a4ab;
+  }
+
+  .card-body {
+    background-color: #f0e14a;
+  }
+
+  &:hover {
+    .list-group-item {
+      background-color: #f9b798;
+    }
+
+    .card-body {
+      background-color: #e89ac7;
+    }
+  }
+}
+
+
+

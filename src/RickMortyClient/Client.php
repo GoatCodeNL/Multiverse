@@ -2,6 +2,8 @@
 
 namespace App\RickMortyClient;
 
+use Symfony\Contracts\Cache\CacheInterface;
+use Symfony\Contracts\Cache\ItemInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class Client
@@ -9,22 +11,24 @@ class Client
     private const ITEMS_PER_PAGE = 20;
 
     private HttpClientInterface $httpClient;
+    private CacheInterface $cache;
 
-    public function __construct(HttpClientInterface $httpClient)
+    public function __construct(HttpClientInterface $httpClient, CacheInterface $cache)
     {
         $this->httpClient = $httpClient;
+        $this->cache = $cache;
     }
 
     public function getLocations(?int $offset = 0, ?int $count = 20): LocationCollection
     {
         $page = (int)($offset / self::ITEMS_PER_PAGE) + 1;
-        $pageOffset = $offset;
+        $pageOffset = $offset % self::ITEMS_PER_PAGE;
         $items = [];
 
         do {
             $locationsData = $this->getLocationsData($page);
             $itemCount = $locationsData->info->count;
-            foreach(array_slice($locationsData->results, $pageOffset, $count - count($items)) as $item) {
+            foreach (array_slice($locationsData->results, $pageOffset, $count - count($items)) as $item) {
                 $items[] = $this->mapLocation($item);
             }
             $page++;
@@ -41,22 +45,63 @@ class Client
 
     private function getLocationsData(int $page): object
     {
-        $response = $this->httpClient->request(
-            'GET',
+        return json_decode($this->doRequest(
             'https://rickandmortyapi.com/api/location?page=' . $page
-        );
-
-        return json_decode($response->getContent());
+        ));
     }
 
     private function getLocationData(int $id): object
     {
-        $response = $this->httpClient->request(
-            'GET',
+        return json_decode($this->doRequest(
             'https://rickandmortyapi.com/api/location/' . $id
-        );
+        ));
+    }
 
-        return json_decode($response->getContent());
+    public function mapLocation(object $item): Location
+    {
+        return new Location(
+            id: $item->id,
+            name: $item->name,
+            type: $item->type,
+            dimension: $item->dimension,
+            residents: $item->residents,
+        );
+    }
+
+
+    public function getCharactersBulk(array $characterUrls): CharacterCollection
+    {
+        // Strip the Id's from the url's
+        $ids = array_map(function ($characterUrl) {
+            return substr($characterUrl, strrpos($characterUrl, "/") + 1);
+        }, $characterUrls);
+
+        $charactersData = json_decode($this->doRequest(
+            'https://rickandmortyapi.com/api/character/' . implode(",", $ids)
+        ));
+
+        return new CharacterCollection(
+            array_map(function ($characterData) {
+                return $this->mapCharacter($characterData);
+            }, $charactersData),
+            count($charactersData)
+        );
+    }
+
+    public function mapCharacter(object $item): Character
+    {
+        return new Character(
+            id: $item->id,
+            name: $item->name,
+            status: $item->status,
+            species: $item->species,
+            type: $item->type,
+            gender: $item->gender,
+            origin: $item->origin,
+            location: $item->location,
+            image: $item->image,
+            episode: $item->episode
+        );
     }
 
     public function getCharacters(): CharacterCollection
@@ -79,14 +124,16 @@ class Client
 
     }
 
-    public function mapLocation(object $item): Location
+    private function doRequest(string $url): string
     {
-        return new Location(
-            id: $item->id,
-            name: $item->name,
-            type: $item->type,
-            dimension: $item->dimension,
-            residents: $item->residents,
-        );
+        return $this->cache->get("httpcache-".sha1($url), function (ItemInterface $item) use ($url) {
+            $item->expiresAfter(3600);
+            $respone = $this->httpClient->request(
+                'GET',
+                $url
+            );
+
+            return $respone->getContent();
+        });
     }
 }

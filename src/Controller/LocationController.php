@@ -24,7 +24,6 @@ class LocationController extends AbstractController
         $page = $request->get("page") ?? 1;
 
         return $this->render('location/index.html.twig', [
-            'controller_name' => 'TestController',
             'locations' => $this->rickMortyClient->getLocations(($page - 1) * $locationsPerPage, $locationsPerPage),
             'page' => $page,
         ]);
@@ -33,9 +32,10 @@ class LocationController extends AbstractController
     #[Route('/location/{id}', name: 'locationShow')]
     public function locationShow(int $id): Response
     {
+        $location = $this->rickMortyClient->getLocation($id);
         return $this->render('location/show.html.twig', [
-            'controller_name' => 'TestController',
-            'location' => $this->rickMortyClient->getLocation($id)
+            'location' => $location,
+            'residents' => $this->rickMortyClient->getCharactersBulk($location->getResidents()),
         ]);
     }
 }
