@@ -2,7 +2,7 @@
 This was made as a response to the [Bax Music Rick and Morty developer case](https://github.com/Baxshopnl/Rick-and-Morty-Case) 
 
 ## Disclaimer
-If you are applying for at job at Bax Music and you try to use my code to cheat your way through the challenge... DON'T!
+If you are applying for a job at Bax Music and you try to use my code to cheat your way through the challenge... DON'T!
 
 It is filled with bugs, the code is terrible, it looks even worse. Using this as an example or a cheat will 
 most likely end your development career. Just cloning the code can melt your harddrives and overload the USB-bridge.
