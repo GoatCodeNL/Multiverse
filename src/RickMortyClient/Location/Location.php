@@ -37,7 +37,7 @@ class Location implements ItemInterface
         return $this->dimension;
     }
 
-    public function getDimensionId(): string
+    public function getDimensionId(): int
     {
         return Dimension::generateId($this->dimension);
     }

@@ -2,6 +2,7 @@
 
 namespace App\RickMortyClient;
 
+
 abstract class Collection implements CollectionInterface
 {
     private int $position = 0;
@@ -29,12 +30,12 @@ abstract class Collection implements CollectionInterface
         return $this->position;
     }
 
-    public function valid()
+    public function valid(): bool
     {
         return $this->position < count($this->items);
     }
 
-    public function rewind()
+    public function rewind(): void
     {
         $this->position = 0;
     }
