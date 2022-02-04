@@ -9,6 +9,7 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 class Client
 {
     private const ITEMS_PER_PAGE = 20;
+    const BASE_URL = "https://rickandmortyapi.com/api/";
 
     private HttpClientInterface $httpClient;
     private CacheInterface $cache;
@@ -104,14 +105,42 @@ class Client
         );
     }
 
-    public function getCharacters(): CharacterCollection
+    public function getCharacters(?int $offset = 0, ?int $count = 20): CharacterCollection
     {
+        $page = (int)($offset / self::ITEMS_PER_PAGE) + 1;
+        $pageOffset = $offset % self::ITEMS_PER_PAGE;
+        $items = [];
 
+        do {
+            $characterData = $this->getCharactersData($page);
+            $itemCount = $characterData->info->count;
+            foreach (array_slice($characterData->results, $pageOffset, $count - count($items)) as $item) {
+                $items[] = $this->mapCharacter($item);
+            }
+            $page++;
+            $pageOffset = 0;
+        } while (count($items) < $count && (count($items) + $offset) < $itemCount);
+
+        return new CharacterCollection($items, $itemCount);
     }
 
     public function getCharacter(int $characterId): Character
     {
+        return $this->mapCharacter($this->getCharacterData($characterId));
+    }
 
+    private function getCharactersData(int $page)
+    {
+        return json_decode($this->doRequest(
+            'https://rickandmortyapi.com/api/character?page=' . $page
+        ));
+    }
+
+    private function getCharacterData(int $id): object
+    {
+        return json_decode($this->doRequest(
+            self::BASE_URL . 'character/' . $id
+        ));
     }
 
     public function getDimensions(): DimensionCollection
@@ -136,4 +165,6 @@ class Client
             return $respone->getContent();
         });
     }
+
+
 }

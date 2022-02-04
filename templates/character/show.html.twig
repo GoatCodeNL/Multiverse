@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}HELLO{% endblock %}
+
+{% block body %}
+    <div class="card">
+        <div class="card-body">
+            <img src="{{ character.image }}" alt="{{ character.name }}" >
+            <h5 class="card-title">
+                {{ character.name }}
+            </h5>
+            <p class="card-subtitle"></p>
+        </div>
+
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Status: {{ character.status }}</li>
+            <li class="list-group-item">Species: {{ character.species }}</li>
+            <li class="list-group-item">Type: {{ character.type }}</li>
+            <li class="list-group-item">Gender: {{ character.gender }}</li>
+            <li class="list-group-item">Origin: todo</li>
+            <li class="list-group-item">Last known location: todo</li>
+            <li class="list-group-item">Episodes: todo</li>
+
+        </ul>
+    </div>
+{% endblock %}

@@ -9,31 +9,32 @@
 {% endblock %}
 
 {% block body %}
+
+
     <ul class="pagination">
         <li class="page-item">
-            <a class="page-link" href="{{ path('locationIndex', {'page': page - 1}) }}">Previous</a>
+            <a class="page-link" href="{{ path('characterIndex', {'page': page - 1}) }}">Previous</a>
         </li>
         <li class="page-item">
-            <a class="page-link" href="{{ path('locationIndex', {'page': page + 1}) }}">Next</a>
+            <a class="page-link" href="{{ path('characterIndex', {'page': page + 1}) }}">Next</a>
         </li>
     </ul>
     <div class="row">
 
-        {% for location in locations %}
+        {% for character in characters %}
             <div class="col">
-                <a href="{{ path('locationShow', {'id': location.id}) }}">
-                    <div class="card" style="width: 24rem;">
+                <a href="{{ path('characterShow', {'id': character.id}) }}">
+                    <div class="card" style="width: 18rem;">
+                        <img class="card-img-top" src="{{ character.image }}" alt="{{ character.name }}" >
                         <div class="card-body">
                             <h5 class="card-title">
-                                {{ location.name }}
+                                {{ character.name }}
                             </h5>
                             <p class="card-subtitle"></p>
                         </div>
 
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Dimension: {{ location.dimension }}</li>
-                            <li class="list-group-item">Type: {{ location.type }}</li>
-                            <li class="list-group-item">Residents: {{ location.residents | length }}</li>
+                            <li class="list-group-item">Status: {{ character.status }}</li>
                         </ul>
                     </div>
                 </a>
