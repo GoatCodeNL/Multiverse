@@ -1,6 +1,8 @@
 <?php
 
-namespace App\RickMortyClient;
+namespace App\RickMortyClient\Character;
+
+use App\RickMortyClient\BaseClient;
 
 /**
  * @method Character get(int $id)

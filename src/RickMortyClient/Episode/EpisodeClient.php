@@ -1,6 +1,9 @@
 <?php
 
-namespace App\RickMortyClient;
+namespace App\RickMortyClient\Episode;
+
+use App\RickMortyClient\BaseClient;
+use function dump;
 
 /**
  * @method static Episode get(int $id)
@@ -9,7 +12,8 @@ namespace App\RickMortyClient;
  */
 class EpisodeClient extends BaseClient
 {
-    protected function createCollection($items, $itemCount): EpisodeCollection {
+    protected function createCollection($items, $itemCount): EpisodeCollection
+    {
         return new EpisodeCollection($items, $itemCount);
     }
 

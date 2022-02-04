@@ -2,10 +2,9 @@
 
 namespace App\Controller;
 
-use App\RickMortyClient\BaseClient;
-use App\RickMortyClient\CharacterClient;
-use App\RickMortyClient\EpisodeClient;
-use App\RickMortyClient\LocationClient;
+use App\RickMortyClient\Character\CharacterClient;
+use App\RickMortyClient\Episode\EpisodeClient;
+use App\RickMortyClient\Location\LocationClient;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -33,6 +32,7 @@ class CharacterController extends AbstractController
         return $this->render('character/index.html.twig', [
             'characters' => $this->characterClient->getAll(($page - 1) * $charactersPerPage, $charactersPerPage),
             'page' => $page,
+            'itemsPerPage' => $charactersPerPage,
         ]);
     }
 

@@ -9,15 +9,18 @@
 {% endblock %}
 
 {% block body %}
-
-
     <ul class="pagination">
-        <li class="page-item">
-            <a class="page-link" href="{{ path('characterIndex', {'page': page - 1}) }}">Previous</a>
-        </li>
-        <li class="page-item">
-            <a class="page-link" href="{{ path('characterIndex', {'page': page + 1}) }}">Next</a>
-        </li>
+        {% if(page > 1) %}
+            <li class="page-item">
+                <a class="page-link" href="{{ path('characterIndex', {'page': page - 1}) }}">Previous</a>
+            </li>
+        {% endif %}
+
+        {% if (page * itemsPerPage < characters.itemCount) %}
+            <li class="page-item">
+                <a class="page-link" href="{{ path('characterIndex', {'page': page + 1}) }}">Next</a>
+            </li>
+        {% endif %}
     </ul>
     <div class="row">
 
@@ -25,7 +28,7 @@
             <div class="col">
                 <a href="{{ path('characterShow', {'id': character.id}) }}">
                     <div class="card" style="width: 18rem;">
-                        <img class="card-img-top" src="{{ character.image }}" alt="{{ character.name }}" >
+                        <img class="card-img-top" src="{{ character.image }}" alt="{{ character.name }}">
                         <div class="card-body">
                             <h5 class="card-title">
                                 {{ character.name }}

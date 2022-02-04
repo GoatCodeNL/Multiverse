@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello IndexController!{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="d-flex justify-content-center">
+            <a href="{{ path('randomLocation') }}">
+                <img src="{{ asset('build/images/portal-rick-and-morty.gif') }}" alt="Portal" class="text-center"
+                     height="400px"/>
+            </a>
+        </div>
+    </div>
+{% endblock %}

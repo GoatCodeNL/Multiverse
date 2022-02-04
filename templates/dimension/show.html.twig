@@ -5,33 +5,26 @@
 {% block body %}
     <div class="card">
         <div class="card-body">
-            <img src="{{ dimension.image }}" alt="{{ dimension.name }}" >
             <h5 class="card-title">
                 {{ dimension.name }}
             </h5>
         </div>
 
         <ul class="list-group list-group-flush">
-            <li class="list-group-item">Status: {{ dimension.status }}</li>
-            <li class="list-group-item">Species: {{ dimension.species }}</li>
-            {% if dimension.type %}
-            <li class="list-group-item">Type: {{ dimension.type }}</li>
-            {% endif %}
-            <li class="list-group-item">Gender: {{ dimension.gender }}</li>
-            <li class="list-group-item">Origin:
-                {% if(origin.id > 0) %}
-                    <a href="{{ path('locationShow', {'id': origin.id}) }}">{{ origin.name }}</a>
-                {% else %}
-                    {{ origin.name }}
-                {% endif %}
+            <li class="list-group-item">Locations:
+                <ul>
+                    {% for location in dimension.locations %}
+                        <li><a href="{{ path('locationShow', {'id': location.id}) }}">{{ location.name }}</a></li>
+                    {% endfor %}
+                </ul>
             </li>
-            <li class="list-group-item">Last known location:
-                {% if(location.id > 0) %}
-                    <a href="{{ path('locationShow', {'id': location.id}) }}">{{ location.name }}</a>
-                {% else %}
-                    {{ location.name }}
-                {% endif %}
-            <li class="list-group-item">Episodes: todo</li>
+            <li class="list-group-item">
+                {% for resident in residents %}
+                    <a href="{{ path('characterShow', {'id': resident.id}) }}">
+                        <img src="{{ resident.image }}" alt="{{ resident.name }}" class="img-thumbnail">
+                    </a>
+                {% endfor %}
+            </li>
         </ul>
     </div>
 {% endblock %}

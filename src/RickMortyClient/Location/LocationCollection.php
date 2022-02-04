@@ -1,6 +1,8 @@
 <?php
 
-namespace App\RickMortyClient;
+namespace App\RickMortyClient\Location;
+
+use App\RickMortyClient\Collection;
 
 class LocationCollection extends Collection
 {

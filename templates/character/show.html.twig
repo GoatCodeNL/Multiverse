@@ -5,7 +5,7 @@
 {% block body %}
     <div class="card">
         <div class="card-body">
-            <img src="{{ character.image }}" alt="{{ character.name }}" >
+            <img src="{{ character.image }}" alt="{{ character.name }}">
             <h5 class="card-title">
                 {{ character.name }}
             </h5>
@@ -15,7 +15,7 @@
             <li class="list-group-item">Status: {{ character.status }}</li>
             <li class="list-group-item">Species: {{ character.species }}</li>
             {% if character.type %}
-            <li class="list-group-item">Type: {{ character.type }}</li>
+                <li class="list-group-item">Type: {{ character.type }}</li>
             {% endif %}
             <li class="list-group-item">Gender: {{ character.gender }}</li>
             <li class="list-group-item">Origin:
@@ -34,7 +34,8 @@
             <li class="list-group-item">Episodes:
                 <ul>
                     {% for episode in episodes %}
-                    <li><a href="{{ path('episodeShow', {'id': episode.id}) }}">{{ episode.episodeCode }} - {{ episode.name }}</a></li>
+                        <li><a href="{{ path('episodeShow', {'id': episode.id}) }}">{{ episode.episodeCode }}
+                                - {{ episode.name }}</a></li>
                     {% endfor %}
                 </ul>
             </li>

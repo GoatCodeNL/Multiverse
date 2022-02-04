@@ -28,6 +28,7 @@ abstract class BaseClient implements ClientInterface
 
     public function getAll(?int $offset = 0, ?int $count = 20): CollectionInterface
     {
+        // This API is paged per 20. Squanch data until Schwifty.
         $page = (int)($offset / self::ITEMS_PER_PAGE) + 1;
         $pageOffset = $offset % self::ITEMS_PER_PAGE;
         $items = [];
@@ -54,6 +55,10 @@ abstract class BaseClient implements ClientInterface
 
     public function getBulk(array $urls): CollectionInterface
     {
+        if (count($urls) === 0) {
+            return $this->createCollection([], 0);
+        }
+
         // Extract the Id's from the url's
         $ids = array_map(function ($url) {
             return $this->extractIdFromURL($url);

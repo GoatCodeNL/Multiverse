@@ -38,4 +38,12 @@ abstract class Collection implements CollectionInterface
     {
         $this->position = 0;
     }
+
+    /**
+     * @return int
+     */
+    public function getItemCount(): int
+    {
+        return $this->itemCount;
+    }
 }

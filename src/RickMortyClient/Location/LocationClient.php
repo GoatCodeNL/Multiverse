@@ -1,6 +1,8 @@
 <?php
 
-namespace App\RickMortyClient;
+namespace App\RickMortyClient\Location;
+
+use App\RickMortyClient\BaseClient;
 
 /**
  * @method static Location get(int $id)

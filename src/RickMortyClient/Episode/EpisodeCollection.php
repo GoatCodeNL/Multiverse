@@ -1,6 +1,8 @@
 <?php
 
-namespace App\RickMortyClient;
+namespace App\RickMortyClient\Episode;
+
+use App\RickMortyClient\Collection;
 
 class EpisodeCollection extends Collection
 {

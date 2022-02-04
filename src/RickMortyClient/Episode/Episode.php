@@ -1,6 +1,8 @@
 <?php
 
-namespace App\RickMortyClient;
+namespace App\RickMortyClient\Episode;
+
+use App\RickMortyClient\ItemInterface;
 
 class Episode implements ItemInterface
 {
@@ -15,41 +17,26 @@ class Episode implements ItemInterface
     {
     }
 
-    /**
-     * @return int
-     */
     public function getId(): int
     {
         return $this->id;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    /**
-     * @return string
-     */
     public function getAirDate(): string
     {
         return $this->airDate;
     }
 
-    /**
-     * @return string
-     */
     public function getEpisodeCode(): string
     {
         return $this->episodeCode;
     }
 
-    /**
-     * @return array
-     */
     public function getCharacters(): array
     {
         return $this->characters;

@@ -11,13 +11,19 @@
         </div>
 
         <ul class="list-group list-group-flush">
-            <li class="list-group-item">Dimension: {{ location.dimension }}</li>
+            <li class="list-group-item">Dimension:
+                {% if(location.dimensionId > 0) %}
+                    <a href="{{ path('dimensionShow', {'id': location.dimensionId}) }}">{{ location.dimension }}</a>
+                {% else %}
+                    {{ location.dimension }}
+                {% endif %}
+            </li>
             <li class="list-group-item">Type: {{ location.type }}</li>
             <li class="list-group-item">
                 {% for resident in residents %}
-                <a href="{{ path('characterShow', {'id': resident.id}) }}">
-                    <img src="{{ resident.image }}" alt="{{ resident.name }}" class="img-thumbnail">
-                </a>
+                    <a href="{{ path('characterShow', {'id': resident.id}) }}">
+                        <img src="{{ resident.image }}" alt="{{ resident.name }}" class="img-thumbnail">
+                    </a>
                 {% endfor %}
             </li>
         </ul>

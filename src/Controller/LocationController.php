@@ -2,10 +2,8 @@
 
 namespace App\Controller;
 
-use App\RickMortyClient\BaseClient;
-use App\RickMortyClient\Character;
-use App\RickMortyClient\CharacterClient;
-use App\RickMortyClient\LocationClient;
+use App\RickMortyClient\Character\CharacterClient;
+use App\RickMortyClient\Location\LocationClient;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,6 +29,7 @@ class LocationController extends AbstractController
         return $this->render('location/index.html.twig', [
             'locations' => $this->locationClient->getAll(($page - 1) * $locationsPerPage, $locationsPerPage),
             'page' => $page,
+            'itemsPerPage' => $locationsPerPage,
         ]);
     }
 
