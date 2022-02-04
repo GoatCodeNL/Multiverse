@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}HELLO{% endblock %}
+
+{% block body %}
+    <div class="card">
+        <div class="card-body">
+            <img src="{{ asset('build/images/plumbus.png') }}" alt="Plumbus" width="100%">
+            <h5 class="card-title">
+                Plumbus
+            </h5>
+        </div>
+
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <h3>Usage</h3>
+                <p>Usage of the plumbus is self-explanatory. Additional description not required.</p>
+            </li>
+
+            <li class="list-group-item">
+                <h3>How it's made</h3>
+                <p>
+                    <img src="{{ asset('build/images/plumbus-how-made.png') }}" alt="How it's made" width="100%">
+                </p>
+                <p>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/SWMGd_rzRdY"
+                            title="YouTube video player" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen></iframe>
+                </p>
+            </li>
+        </ul>
+    </div>
+{% endblock %}
