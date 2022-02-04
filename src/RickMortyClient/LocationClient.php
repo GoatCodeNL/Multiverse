@@ -5,7 +5,7 @@ namespace App\RickMortyClient;
 /**
  * @method static Location get(int $id)
  * @method static LocationCollection getAll(?int $offset = 0, ?int $count = 20)
- * @method static LocationCollection getBulkByUrl(array $urls)
+ * @method static LocationCollection getBulk(array $urls)
  */
 class LocationClient extends BaseClient
 {

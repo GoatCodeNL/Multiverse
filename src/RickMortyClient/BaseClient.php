@@ -81,7 +81,7 @@ abstract class BaseClient implements ClientInterface
         );
     }
 
-    private function extractIdFromURL(string $url): int
+    protected function extractIdFromURL(string $url): int
     {
         return (int)substr($url, strrpos($url, "/") + 1);
     }

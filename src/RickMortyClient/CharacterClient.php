@@ -3,13 +3,14 @@
 namespace App\RickMortyClient;
 
 /**
- * @method static Character get(int $id)
- * @method static CharacterCollection getAll(?int $offset = 0, ?int $count = 20)
- * @method static CharacterCollection getBulkByUrl(array $urls)
+ * @method Character get(int $id)
+ * @method CharacterCollection getAll(?int $offset = 0, ?int $count = 20)
+ * @method CharacterCollection getBulk(array $urls)
  */
 class CharacterClient extends BaseClient
 {
-    protected function createCollection($items, $itemCount): CharacterCollection {
+    protected function createCollection($items, $itemCount): CharacterCollection
+    {
         return new CharacterCollection($items, $itemCount);
     }
 

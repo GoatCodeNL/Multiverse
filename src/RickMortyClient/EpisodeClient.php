@@ -5,7 +5,7 @@ namespace App\RickMortyClient;
 /**
  * @method static Episode get(int $id)
  * @method static EpisodeCollection getAll(?int $offset = 0, ?int $count = 20)
- * @method static EpisodeCollection getBulkByUrl(array $urls)
+ * @method static EpisodeCollection getBulk(array $urls)
  */
 class EpisodeClient extends BaseClient
 {

@@ -12,9 +12,9 @@ class Character implements ItemInterface
         private string $type, // The type or subspecies of the character.
         private string $gender, // The gender of the character ('Female', 'Male', 'Genderless' or 'unknown').
         private object $origin, // Name and link to the character's origin location.
-        private int $originId, // Name and link to the character's origin location.
+        private int    $originId, // Name and link to the character's origin location.
         private object $location, // Name and link to the character's last known location endpoint.
-        private int $locationId, // Name and link to the character's last known location endpoint.
+        private int    $locationId, // Name and link to the character's last known location endpoint.
         private string $image, // (url)	Link to the character's image. All images are 300x300px and most are medium shots or portraits since they are intended to be used as avatars.
         private array  $episode, // (urls)	List of episodes in which this character appeared.id
     )
