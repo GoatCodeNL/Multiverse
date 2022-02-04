@@ -35,7 +35,6 @@ COPY config /var/www/config
 COPY public /var/www/public
 COPY src /var/www/src
 COPY templates /var/www/templates
-COPY var /var/www/var
 COPY .env.prod /var/www/.env
 COPY composer.json /var/www/
 
