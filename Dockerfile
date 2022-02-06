@@ -18,7 +18,6 @@ COPY assets ./assets
 COPY yarn.lock ./
 COPY webpack.config.js ./
 
-RUN ls -lah
 RUN yarn install
 RUN yarn build
 
@@ -29,10 +28,10 @@ RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-av
 RUN a2enmod rewrite
 
 COPY --from=composer /app/vendor /var/www/vendor
+COPY public /var/www/public
 COPY --from=node /app/public/build /var/www/public/build
 COPY bin /var/www/bin
 COPY config /var/www/config
-COPY public /var/www/public
 COPY src /var/www/src
 COPY templates /var/www/templates
 COPY .env.prod /var/www/.env

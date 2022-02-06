@@ -28,7 +28,8 @@ class DimensionClient implements ClientInterface
     {
         $dimensions = $this->retrieveAllDimensions();
 
-        return new DimensionCollection(array_splice($dimensions, $offset, $count), count($dimensions));
+        $itemCount = count($dimensions);
+        return new DimensionCollection(array_splice($dimensions, $offset, $count), $itemCount);
     }
 
     public function get(int $id): Dimension
